@@ -1,0 +1,148 @@
+; Sample input file for simple.py slide deck creator
+
+; Turn this into a bunch of html files with:
+;     simple.py --title-h1 -t template.html example.diff
+
+; This file's name ends with a .diff extension because smart text editors 
+; tend to color code such files in ways that work well for our purpose.
+
+; Lines that start with ; are comments.  They cause lines to be ignored.
+
+; The first slide is the universal slide. These values will be used for each 
+; slide (don't worry, you can override on a per-slide basis later).  If it
+; looks like a lot of options, it doesn't have to be: You can omit any 
+; option and stick with the in-built default.  The options in this file are all
+; set to the in-built default (except for the background image, which is
+; normally blank).
+
+; We can specify background colors by html color name.
+; See http://www.w3schools.com/cssref/css_colornames.asp for 147 colors
+[black]
+; Or we can say it another way:
+[bg_color=black]
+; Or we can specify a color by hex code:
+[bg_color=#000000]
+
+
+; The foreground text color is similar:
+[text_color=white]
+; Or by hex code:
+[text_color=#FFFFFF]
+
+
+; Set the font
+[font_family=Helvetica, Verdana, Arial, Sans-serif]
+[font_size=40px]
+[font_style=normal]
+[font_weight=100]
+
+; We can also specify bold with [bold]
+
+; Text is displayed against the background image inside a semi-opaque box.
+; This provides contrast and lets your audience see your text.
+[opacity=55]
+; We can even change the color of the semi-opaque box. Black is usually best, 
+; though:
+[text_bg=black]
+; The semi-opaque box can appear in any of 9 places:
+;   [top_left]     [top]      [top_right]
+;   [left]        [center]        [right]
+;   [bottom_left] [bottom] [bottom_right]
+; By default, text goes in the middle of the screen:
+[center]
+; Text within the box can be left, center or right justified:
+[halign=left]
+
+; THIS FEATURE IS NOT YET IMPLEMENTED.  It sets the time to show each slide.
+; At the end of 5.5 seconds, the browser will go to the next slide.  Omit this
+; option or set to 0 to disable auto advancing the slide.
+[duration=5.5]
+
+; We can set the background image in long form:
+[bg_image=example.png]
+; Or we can just name a file:
+[example.png]
+
+; Normally we want the background image to be stretched to fit the screen:
+[bg_height=100%]
+[bg_width=100%]
+
+; And normally we want it to start in the upper left corner:
+[bg_x=0px]
+[bg_y=0px]
+
+; Each slide can have a title or you can set one globally.  Normally the title is 
+; blank:
+[title=]
+
+
+; That's it!  Those are the default universal options for your slides.  Override
+; them as you please.  You probably want the default for most options, so you 
+; can delete most of the above from your input file.
+
+
+; Start each slide with two dashes.  Everything after the dashes (but before 
+; the next dash line) gets copied to the slide
+-- [width=50%]
+This is a slide.  It inherits all the default values of  
+the universal slide, including the background image.  
+\
+<sub>BTW, press F-11 in most browsers to go full screen.</sub>
+
+
+
+
+; Set options on the line with the dashes:
+-- [white] [text_color=black]
+We can override the background  
+image by specifying a background  
+color (in this case, white).  
+\
+<sub>Or we could use [bg_image=] to display the</sub>  
+<sup>default background color.</sup>
+
+
+-- [title=Keys]
+By now, you know to hit the space bar to go  
+to the next slide.  Other keys:  
+
+  * Ctrl+Home - First slide 
+  * Ctrl+End - Last slide
+  * Page Up - Table of contents
+-- [title=Simple Slides]
+The slides are simple.  Here's the last one:
+
+     -- [title=Keys]
+     By now, you know to hit the space bar to go  
+     to the next slide.  Other keys:  
+     
+       * Ctrl+Home - First slide 
+       * Ctrl+End - Last slide
+       * Page Up - Table of contents
+
+
+-- [title=Pandoc][xmas_cactus.jpg][bottom_left]
+By default, we use markdown.  But there is a command line option that allows you to specify any other filter to convert what you type to html.  Here is how we could use `Pandoc` to process rst input:
+
+           --filter "pandoc --from=rst --to=html"
+
+
+
+
+-- [title=Markdown Tips] [xmas_cactus.jpg] [bottom]
+A paragraph is one or more lines of text followed by one or more blank line. Newlines are treated as spaces, so you can reflow your paragraphs as you like. If you need a hard line break, put two or more spaces at the end of a line, or type a backslash followed by a newline.  
+\
+<sub>See [Pandoc readme](http://johnmacfarlane.net/pandoc/README.html) for more tips.</sub>
+
+
+
+-- [title=HTML Works] [xmas_cactus.jpg]
+<table cellpadding="25"><tr><td>Of course, this is just a web  
+page.  You can put html here  
+and it works as expected.</td><td><div style="margin-bottom:5px;"></div><div style="border:1px solid #000;width:250px;"><div style="background-color:#000;border:2px solid #FFF;padding:5px;text-align:center;"><img src="http://tmbg.duckduckgo.com/nduck.v106.small.png" alt="DuckDuckGo logo"/><div style="color:#fff;font-size:12px;padding:5px;">DuckDuckGo is a search engine that protects privacy and has lots of features.</div><form action="http://duckduckgo.com/"><input type="text" name="q" style="width:160px;border:1px solid #666;background-color:#000;color:#fff;padding:1px;border-radius:4px;font-size:14px;"/><input type="submit" style="background-color:#000;color:#fff;font-size:12px;padding:2px;" value="Search"><input type="hidden" name="t" value=""/></form></div></div></td>
+</tr></table>
+
+
+
+-- [ottoman.jpg] [bottom] [opacity=25]
+
