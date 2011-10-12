@@ -11,6 +11,8 @@ __maintainer__ = "James Vasile"
 __email__ = "james@jamesvasile.com"
 __status__ = "Development"
 
+BKGRND_DIR = "images/bkgrnd"
+
 defaults = {
            'bg_color':'black',
            'bg_height':"100%",
@@ -130,7 +132,7 @@ class Slide():
            'content':'',
            'last_slide': "slide_%02d.html" % self.deck.count,
            'next':"slide_%02d.html" % min(self.deck.count, self.num+1),
-           'opaque_image':"bkgrnd/opaque_%02d.png" % self.num,
+           'opaque_image':os.path.join(BKGRND_DIR, "opaque_%02d.png" % self.num),
            'prev':'slide_%02d.html' % max(1, self.num-1),
            }
       l.update(defaults)
@@ -151,7 +153,7 @@ class Slide():
       print "Writing %s" % fname
       with open(fname, 'w') as OUTF:
          OUTF.write( template.render(**l))
-      subprocess.call(shlex.split("mkdir -p bkgrnd"))
+      subprocess.call(shlex.split("mkdir -p %s" % BKGRND_DIR))
       make_transparent_pixel(l["opaque_image"], l['text_bg'], l['opacity'])
 
 class Slides():
