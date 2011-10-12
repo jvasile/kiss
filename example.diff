@@ -1,7 +1,7 @@
-; Sample input file for simple.py slide deck creator
+; Sample input file for the KISS slide deck creator
 
 ; Turn this into a bunch of html files with:
-;     simple.py --title-h1 -t template.html example.diff
+;     kiss.py --title-h1 -t template.html example.diff
 
 ; This file's name ends with a .diff extension because smart text editors 
 ; tend to color code such files in ways that work well for our purpose.

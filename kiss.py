@@ -202,11 +202,11 @@ def init_dir():
 def parse_cmdline():
    parser = argparse.ArgumentParser(description="Easily produce image-heavy, browser-based, minimal text slide deck.",
                                     usage="%s [opts] --template TEMPLATE INPUTFILE " % sys.argv[0],
-                                    epilog='Simple is copyright (c) 2011 by James Vasile.',
+                                    epilog='KISS is copyright (c) 2011 by James Vasile.',
                                     )
    parser.add_argument('-t', '--template', action='store', metavar="FILE", help='specify template FILE')
    parser.add_argument('--title-h1', action='store_true', help='Insert title of each page as first line of slide with <h1> tags')
-   parser.add_argument('-i','--init', action='store_true', help='create a simple project in this directory')
+   parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy')
    parser.add_argument('--test', action='store_true', help='run test suite')
 
