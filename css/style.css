@@ -1,0 +1,17 @@
+/* This css controls how things are displayed.  If you're looking to
+affect the layout and look without harming the function, this file is
+your best bet.  */
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+p { margin: 0; }
+h1 { font-size: 115%;
+     font-weight: bold;
+     color:red;
+     margin:0;
+     padding:0;}
+
