@@ -1,7 +1,7 @@
 ; Sample input file for the KISS slide deck creator
 
 ; Turn this into a bunch of html files with:
-;     kiss.py template.html example.mdwn
+;     kiss.py example.mdwn
 
 ; This file's name ends with a .mdwn extension because smart text
 ; editors tend to color code the markdown in such files in ways that
