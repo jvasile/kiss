@@ -24,7 +24,7 @@ __maintainer__ = "James Vasile"
 __email__ = "james@jamesvasile.com"
 __status__ = "Development"
 
-BKGRND_DIR = "images/bkgrnd"
+BKGRND_DIR = "images/tmp"
 
 defaults = {
            'bg_color':'black',
@@ -274,7 +274,8 @@ def init_dir(opt):
       
    
    subprocess.call(shlex.split("cp -r %(d)s/css %(d)s/js %(d)s/template.html %(d)s/example.mdwn ." % {'d': skel}))
-   subprocess.call(shlex.split("mkdir -p images/bkgrnd"))
+   subprocess.call(shlex.split("mkdir -p %s" % BKGRND_DIR))
+   subprocess.call(shlex.split("cp -r %(d)s/images/example_cactus.jpg  %(d)s/images/example_ottoman.jpg  %(d)s/images/example.png images" % {'d': skel}))
 
 def parse_cmdline():
    parser = argparse.ArgumentParser(description="Easily produce image-heavy, browser-based, minimal text slide deck.",
