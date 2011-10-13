@@ -3,8 +3,9 @@
 ; Turn this into a bunch of html files with:
 ;     kiss.py --title-h1 -t template.html example.diff
 
-; This file's name ends with a .diff extension because smart text editors 
-; tend to color code such files in ways that work well for our purpose.
+; This file's name ends with a .mdwn extension because smart text
+; editors tend to color code the markdown in such files in ways that
+; work well for our purpose.
 
 ; Lines that start with ; are comments.  They cause lines to be ignored.
 
