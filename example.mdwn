@@ -166,4 +166,9 @@ and it works as expected.</td><td><div style="margin-bottom:5px;"></div><div sty
 
 
 
--- [ottoman.jpg] [bottom] [opacity=25]
+-- [ottoman.jpg] [bottom]
+# Portability
+KISS outputs html, css and javascript files,  
+so your slideshow will run in any modern  
+browser on any modern computer or smart  
+phone.
