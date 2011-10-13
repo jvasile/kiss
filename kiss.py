@@ -234,7 +234,7 @@ class Slides():
       for s in self.slides[1:]:
          s.render(universal=self.slides[0].fields, template=self.template, last=(s.num == len(self.slides) - 1))
 
-def init_dir():
+def init_dir(opt):
    print "TODO: implement init dir"
 
 def parse_cmdline():
@@ -250,13 +250,12 @@ def parse_cmdline():
 
    opt = parser.parse_args(sys.argv[1:])
 
-   if not opt.datafile:
-      sys.stderr.write("Must specify input file!\n\n")
-      parser.print_help()
-      sys.exit(-1)
-
    if opt.init:
-      init_dir()
+      init_dir(opt)
+   elif not opt.datafile:
+      parser.print_usage()
+      sys.stderr.write("%s: error: too few arguments\n" % os.path.basename(sys.argv[0]))
+      sys.exit(-1)
    else:
       return opt
    sys.exit()
