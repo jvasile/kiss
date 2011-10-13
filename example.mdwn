@@ -1,7 +1,7 @@
 ; Sample input file for the KISS slide deck creator
 
 ; Turn this into a bunch of html files with:
-;     kiss.py --title-h1 -t template.html example.diff
+;     kiss.py template.html example.mdwn
 
 ; This file's name ends with a .mdwn extension because smart text
 ; editors tend to color code the markdown in such files in ways that
@@ -143,13 +143,13 @@ If you want bullets, you can use:
 \
 Input files are expected to be UTF-8.
 
--- [xmas_cactus.jpg][bottom_left]
+-- [example_cactus.jpg][bottom_left]
 # Pandoc
 By default, we use markdown.  But there is a command line option that allows you to specify any other filter to convert what you type to html.  Here is how we could use `Pandoc` to process rst input:
 
            --filter "pandoc --from=rst --to=html"
 
--- [xmas_cactus.jpg] [bottom]
+-- [example_cactus.jpg] [bottom]
 # Markdown Tips
 A paragraph is one or more lines of text followed by one or more blank line. Newlines are treated as spaces, so you can reflow your paragraphs as you like. If you need a hard line break, put two or more spaces at the end of a line, or type a backslash followed by a newline.  
 \
@@ -157,7 +157,7 @@ A paragraph is one or more lines of text followed by one or more blank line. New
 
 
 
--- [xmas_cactus.jpg]
+-- [example_cactus.jpg]
 # HTML Too
 <table cellpadding="25"><tr><td>Of course, this is just a web  
 page.  You can put html here  
@@ -166,7 +166,7 @@ and it works as expected.</td><td><div style="margin-bottom:5px;"></div><div sty
 
 
 
--- [ottoman.jpg] [bottom]
+-- [example_ottoman.jpg] [bottom]
 # Portability
 KISS outputs html, css and javascript files,  
 so your slideshow will run in any modern  
