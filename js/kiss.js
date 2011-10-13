@@ -2,10 +2,10 @@
 function follow_rel(rel) {
     window.location = $('link[rel|="'+rel+'"]').attr("href");
 }
-shortcut.add("Ctrl+Home",function(){  follow_rel("start")  });
-shortcut.add("Space",function() {    follow_rel("next")  });
-shortcut.add("Ctrl+End",function() {  follow_rel("end")  });
-shortcut.add("Page_up",function() {  follow_rel("contents")  });
+shortcut.add("Ctrl+Home",function(){  follow_rel("start")  }, {'disable_in_input':true});
+shortcut.add("Space",function() {    follow_rel("next")  }, {'disable_in_input':true});
+shortcut.add("Ctrl+End",function() {  follow_rel("end")  }, {'disable_in_input':true});
+shortcut.add("Page_up",function() {  follow_rel("contents")  }, {'disable_in_input':true});
 
 
 /* FADE IN */
