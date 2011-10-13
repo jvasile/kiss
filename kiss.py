@@ -87,7 +87,9 @@ def make_transparent_pixel(fname, foreground, opacity):
    subprocess.call(shlex.split("convert -size 70x70 xc:%s  mask.gif -alpha Off  -compose Copy_Opacity   -composite  %s" % (str(foreground), str(fname))))
    os.unlink('mask.gif')
 
-def get_template(fname="template.html"):
+def get_template(fname=None):
+   if not fname:
+      fname = "template.html"
    with open(fname, 'r') as INF:
       template = INF.read()
    return Template(template, input_encoding='utf-8',
@@ -276,7 +278,7 @@ def init_dir(opt):
 
 def parse_cmdline():
    parser = argparse.ArgumentParser(description="Easily produce image-heavy, browser-based, minimal text slide deck.",
-                                    usage="%s [opts] --template TEMPLATE INPUTFILE " % sys.argv[0],
+                                    usage="%s [opts] [TEMPLATE] INPUTFILE " % sys.argv[0],
                                     epilog='KISS is copyright (c) 2011 by James Vasile.',
                                     )
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
@@ -289,13 +291,15 @@ def parse_cmdline():
 
    if opt.init:
       init_dir(opt)
-   elif not opt.inputfile or not opt.template:
+      sys.exit()
+   elif not opt.template:
       parser.print_usage()
       sys.stderr.write("%s: error: too few arguments\n" % os.path.basename(sys.argv[0]))
       sys.exit(-1)
-   else:
-      return opt
-   sys.exit()
+   elif not opt.inputfile:
+      opt.inputfile = opt.template
+      opt.template = None
+   return opt
 
 def main():
    o = parse_cmdline()
