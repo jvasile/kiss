@@ -18,25 +18,30 @@
 ; We can specify background colors by html color name.
 ; See http://www.w3schools.com/cssref/css_colornames.asp for 147 colors
 [black]
-; Or we can say it another way:
-[bg_color=black]
 ; Or we can specify a color by hex code:
 [bg_color=#000000]
+; Or we can say it another way:
+[bg_color=black]
 
 
-; The foreground text color is similar:
-[text_color=white]
-; Or by hex code:
+; The foreground text color is similar.  By hex code:
 [text_color=#FFFFFF]
+; Or color name:
+[text_color=white]
+
 
 
 ; Set the font
 [font_family=Helvetica, Verdana, Arial, Sans-serif]
 [font_size=40px]
 [font_style=normal]
+
+; We can specify bold with 
+[bold]
+
+; But the default normal text is usually better:
 [font_weight=100]
 
-; We can also specify bold with [bold]
 
 ; Text is displayed against the background image inside a semi-opaque box.
 ; This provides contrast and lets your audience see your text.
@@ -57,6 +62,10 @@
 ; At the end of 5.5 seconds, the browser will go to the next slide.  Omit this
 ; option or set to 0 to disable auto advancing the slide.
 [duration=5.5]
+
+; But I like don't like my slides to advance automatically, so the default is
+; to leave that feature disabled:
+[duration=0]
 
 ; We can set the background image in long form:
 [bg_image=example.png]

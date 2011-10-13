@@ -20,7 +20,7 @@ defaults = {
            'bg_width':"100%",
            'bg_x':"0px",
            'bg_y':"0px",
-           'duration':0,
+           'duration':"0",
            'fill':False,
            'fit':False,
            'font_family':'Helvetica, Verdana, Arial, Sans-serif',
@@ -230,8 +230,6 @@ class Slides():
       for s in self.slides[1:]:
          s.render(universal=self.slides[0].fields, template=self.template, last=(s.num == len(self.slides) - 1))
 
-def run_tests():
-   print "TODO: test suite"
 def init_dir():
    print "TODO: implement init dir"
 
@@ -244,7 +242,6 @@ def parse_cmdline():
    parser.add_argument('--title-h1', action='store_true', help='Insert title of each page as first line of slide with <h1> tags')
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy')
-   parser.add_argument('--test', action='store_true', help='run test suite')
 
    parser.add_argument('datafile')
 
@@ -252,8 +249,6 @@ def parse_cmdline():
 
    if opt.init:
       init_dir()
-   elif opt.test:
-      run_tests()
    else:
       return opt
    sys.exit()
