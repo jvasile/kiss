@@ -38,37 +38,37 @@ defaults = {
 }
 
 def encode_for_xml(unicode_data, encoding='ascii'):
-    """
-    Encode unicode_data for use as XML or HTML, with characters outside
-    of the encoding converted to XML numeric character references.
+   """
+   Encode unicode_data for use as XML or HTML, with characters outside
+   of the encoding converted to XML numeric character references.
 
-    Downloaded from http://code.activestate.com/recipes/303668-encoding-unicode-data-for-xml-and-html/ on 13 Oct 2011
-    "Licensed under the PSF License"
-    """
-    try:
-        return unicode_data.encode(encoding, 'xmlcharrefreplace')
-    except ValueError:
-        # ValueError is raised if there are unencodable chars in the
-        # data and the 'xmlcharrefreplace' error handler is not found.
-        # Pre-2.3 Python doesn't support the 'xmlcharrefreplace' error
-        # handler, so we'll emulate it.
-        return _xmlcharref_encode(unicode_data, encoding)
+   Downloaded from http://code.activestate.com/recipes/303668-encoding-unicode-data-for-xml-and-html/ on 13 Oct 2011
+   "Licensed under the PSF License"
+   """
+   try:
+      return unicode_data.encode(encoding, 'xmlcharrefreplace')
+   except ValueError:
+      # ValueError is raised if there are unencodable chars in the
+      # data and the 'xmlcharrefreplace' error handler is not found.
+      # Pre-2.3 Python doesn't support the 'xmlcharrefreplace' error
+      # handler, so we'll emulate it.
+      return _xmlcharref_encode(unicode_data, encoding)
 
 def _xmlcharref_encode(unicode_data, encoding):
-    """Emulate Python 2.3's 'xmlcharrefreplace' encoding error handler.
+   """Emulate Python 2.3's 'xmlcharrefreplace' encoding error handler.
 
-    Downloaded from http://code.activestate.com/recipes/303668-encoding-unicode-data-for-xml-and-html/ on 13 Oct 2011
-    "Licensed under the PSF License"
-    """
-    chars = []
-    # Step through the unicode_data string one character at a time in
-    # order to catch unencodable characters:
-    for char in unicode_data:
-        try:
-            chars.append(char.encode(encoding, 'strict'))
-        except UnicodeError:
-            chars.append('&#%i;' % ord(char))
-    return ''.join(chars)
+   Downloaded from http://code.activestate.com/recipes/303668-encoding-unicode-data-for-xml-and-html/ on 13 Oct 2011
+   "Licensed under the PSF License"
+   """
+   chars = []
+   # Step through the unicode_data string one character at a time in
+   # order to catch unencodable characters:
+   for char in unicode_data:
+      try:
+         chars.append(char.encode(encoding, 'strict'))
+      except UnicodeError:
+         chars.append('&#%i;' % ord(char))
+   return ''.join(chars)
 
 def make_transparent_pixel(fname, foreground, opacity):
    subprocess.call(shlex.split("convert -size 70x70 xc:gray(%s%%) mask.gif" % str(opacity)))
