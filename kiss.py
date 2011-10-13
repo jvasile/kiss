@@ -12,10 +12,6 @@ Released under the GNU General Public License, version 3 or later.
 See LICENSE file for copyright details.
 """
 
-
-
-
-
 import sys, os, copy, subprocess, shlex, argparse, codecs
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
