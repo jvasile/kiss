@@ -246,9 +246,14 @@ def parse_cmdline():
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy')
 
-   parser.add_argument('datafile')
+   parser.add_argument('datafile', nargs='?', default=None)
 
    opt = parser.parse_args(sys.argv[1:])
+
+   if not opt.datafile:
+      sys.stderr.write("Must specify input file!\n\n")
+      parser.print_help()
+      sys.exit(-1)
 
    if opt.init:
       init_dir()
