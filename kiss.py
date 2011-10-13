@@ -1,9 +1,24 @@
 #!/usr/bin/python
 # -*- encoding:utf-8 -*-
+
+"""
+KISS is simple slide presentation tool.
+
+It takes a file of (mostly) markdown and turns it into slides, as per
+your (brief and easy) instructions.
+
+KISS is copyright 2011 James Vasile.
+Released under the GNU General Public License, version 3 or later.
+See LICENSE file for copyright details.
+"""
+
+
+
+
+
 import sys, os, copy, subprocess, shlex, argparse, codecs
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
-
 
 __version__ = "1.2"
 __author__ = "James Vasile"
