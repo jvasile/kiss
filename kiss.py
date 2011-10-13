@@ -4,6 +4,7 @@ import sys, os, copy, subprocess, shlex, argparse, codecs
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
 
+
 __version__ = "1.2"
 __author__ = "James Vasile"
 __copyright__ = "Copyright 2011, James Vasile"
@@ -234,8 +235,33 @@ class Slides():
       for s in self.slides[1:]:
          s.render(universal=self.slides[0].fields, template=self.template, last=(s.num == len(self.slides) - 1))
 
+def check_init_dir(d):
+   """ Check that a skeleton dir has the cs and js directories. """
+   return (os.path.exists(d) and 
+           os.path.exists(os.path.join(d, 'css')) and
+           os.path.exists(os.path.join(d, 'js')))
 def init_dir(opt):
-   print "TODO: implement init dir"
+   script_name = os.path.splitext(os.path.basename(sys.path[0]))[0]
+   script_dir = os.path.abspath(sys.path[0])
+   share = "/usr/share/%s" % script_name
+   local = "/usr/local/share/%s" % script_name
+
+   ## Find skeleton directory
+   if opt.skeleton:
+      skel = opt.skeleton
+   elif check_init_dir(script_dir):
+      skel = script_dir
+   elif check_init_dir(share):
+      skel = share
+   elif check_init_dir(local):
+      skel = local
+   else:
+      sys.stderr.write("Can't find css or javascript files for %s.  You can specify a directory for them with the --skeleton option.\n" % script_name)
+      sys.exit(-1)
+      
+   
+   subprocess.call(shlex.split("cp -r %(d)s/css %(d)s/js %(d)s/template.html %(d)s/example.mdwn ." % {'d': skel}))
+   subprocess.call(shlex.split("mkdir -p images/bkgrnd"))
 
 def parse_cmdline():
    parser = argparse.ArgumentParser(description="Easily produce image-heavy, browser-based, minimal text slide deck.",
@@ -244,7 +270,7 @@ def parse_cmdline():
                                     )
    parser.add_argument('-t', '--template', action='store', metavar="FILE", help='specify template FILE')
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
-   parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy')
+   parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy', default=None)
 
    parser.add_argument('datafile', nargs='?', default=None)
 
