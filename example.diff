@@ -129,6 +129,13 @@ The slides are simple.  Here's the last one:
        * Ctrl+End - Last slide
        * Page Up - Table of contents
 
+---[title=Unicode]
+If you want bullets, you can use:  
+\
+♥ the usual &lt;ul&gt; tags  
+♥ unicode characters (as we did here)  
+\
+Input files are expected to be UTF-8.
 
 -- [title=Pandoc][xmas_cactus.jpg][bottom_left]
 By default, we use markdown.  But there is a command line option that allows you to specify any other filter to convert what you type to html.  Here is how we could use `Pandoc` to process rst input:
