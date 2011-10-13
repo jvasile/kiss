@@ -279,17 +279,17 @@ def parse_cmdline():
                                     usage="%s [opts] --template TEMPLATE INPUTFILE " % sys.argv[0],
                                     epilog='KISS is copyright (c) 2011 by James Vasile.',
                                     )
-   parser.add_argument('-t', '--template', action='store', metavar="FILE", help='specify template FILE')
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy', default=None)
 
-   parser.add_argument('datafile', nargs='?', default=None)
+   parser.add_argument('template', nargs='?', default=None)
+   parser.add_argument('inputfile', nargs='?', default=None)
 
    opt = parser.parse_args(sys.argv[1:])
 
    if opt.init:
       init_dir(opt)
-   elif not opt.datafile:
+   elif not opt.inputfile or not opt.template:
       parser.print_usage()
       sys.stderr.write("%s: error: too few arguments\n" % os.path.basename(sys.argv[0]))
       sys.exit(-1)
@@ -299,7 +299,7 @@ def parse_cmdline():
 
 def main():
    o = parse_cmdline()
-   s = Slides(o.datafile, template=get_template(o.template), opt=o.__dict__)
+   s = Slides(o.inputfile, template=get_template(o.template), opt=o.__dict__)
    s.render()
 
 if __name__=="__main__":
