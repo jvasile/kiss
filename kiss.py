@@ -176,10 +176,13 @@ class Slide():
       for k,v in self.fields.items():
          l[k] = v
 
-      if self.opt['title_h1'] and l['title'] != '':
-         l['content'] = '<h1>%s</h1>%s' % (l['title'], l['content'])
-      l['content'] = self.process_markup(l['content'].encode(sys.getfilesystemencoding()))
-
+      l['content'] = self.process_markup(l['content'].encode(sys.getfilesystemencoding())).strip()
+      if not l['title']:
+          from BeautifulSoup import BeautifulSoup
+          soup= BeautifulSoup(l['content'])
+          body = soup.find('h1')
+          if body:
+              l['title'] = body.contents[0]
       if l['vpos'] == 'center':
          l['vpos'] = "middle"
 
@@ -239,7 +242,6 @@ def parse_cmdline():
                                     epilog='KISS is copyright (c) 2011 by James Vasile.',
                                     )
    parser.add_argument('-t', '--template', action='store', metavar="FILE", help='specify template FILE')
-   parser.add_argument('--title-h1', action='store_true', help='Insert title of each page as first line of slide with <h1> tags')
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy')
 
