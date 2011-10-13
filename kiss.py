@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- encoding:utf-8 -*-
 import sys, os, copy, subprocess, shlex, argparse, codecs
+from BeautifulSoup import BeautifulSoup
 from mako.template import Template
 
 __version__ = "1.2"
@@ -178,7 +179,6 @@ class Slide():
 
       l['content'] = self.process_markup(l['content'].encode(sys.getfilesystemencoding())).strip()
       if not l['title']:
-          from BeautifulSoup import BeautifulSoup
           soup= BeautifulSoup(l['content'])
           body = soup.find('h1')
           if body:
@@ -218,10 +218,11 @@ class Slides():
             continue
          elif line.startswith('--'):
             if len(self.slides) == 0:
+               ## Universal slide
                self.slides.append(Slide(raw=[raw.replace("\n", ' ').strip(),''], count=self.count, opt=self.opt, deck=self))
             else:
                self.slides.append(Slide(raw=[params,raw], count=self.count, opt=self.opt, deck=self))
-               params = line[2:].strip()
+            params = line[2:].strip()
             raw=''
             self.count += 1
          else:
