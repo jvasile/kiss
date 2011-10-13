@@ -1,11 +1,13 @@
 import sys, unittest
 from unittest import TestCase
-import simple
-from simple import Slides, Slide
+import kiss
+from kiss import Slides, Slide
+
+# run with "python testsuite.py"
 
 class SlidesTest (TestCase):
    def setUp (self):
-      self.slides = Slides("example.diff", template=simple.get_template("template.html"), 
+      self.slides = Slides("example.diff", template=kiss.get_template("template.html"), 
                            opt={'title_h1':True})
    def tearDown (self):  pass
         
@@ -15,7 +17,7 @@ class SlidesTest (TestCase):
 
       self.failUnless(self.slides.template != None)
 
-      unloaded_slides = Slides(template=simple.get_template("template.html"), opt={'test':True})
+      unloaded_slides = Slides(template=kiss.get_template("template.html"), opt={'test':True})
       self.failUnless(unloaded_slides.slides == [])
       self.failUnless(unloaded_slides.opt['test'])
       
@@ -39,7 +41,7 @@ class SlidesTest (TestCase):
       """
 
       u = self.slides.slides[0].fields
-      d = simple.defaults
+      d = kiss.defaults
       self.failUnless(u['bg_color'] == d['bg_color'])
       self.failUnless(u['text_color'] == d['text_color'])
       self.failUnless(u['font_family'] == d['font_family'])
@@ -92,5 +94,4 @@ def main():
    runner.run (test_suite)
 
 if __name__ == '__main__':
-
    main()
