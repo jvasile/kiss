@@ -1,4 +1,6 @@
-\#*
-.#*
 slide_*.html
 images/bkgrnd
+*.pyc
+\#*
+.#*
+*~
