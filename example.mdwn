@@ -96,7 +96,7 @@
 ; Start each slide with two dashes.  Everything after the dashes (but before 
 ; the next dash line) gets copied to the slide
 --
-# Keep It Simple
+# Keep It Simple, Silly
 Good slides are simple and pretty.  They engage  
 an audience but do not distract from the speaker.
 --
