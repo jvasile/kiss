@@ -96,25 +96,46 @@
 ; Start each slide with two dashes.  Everything after the dashes (but before 
 ; the next dash line) gets copied to the slide
 --
+# Keep It Simple
+Good slides are simple and pretty.  They engage  
+an audience but do not distract from the speaker.
+--
+# Bullets Are Dangerous 
+Most slide software steers you toward  
+templates for cookie-cutter slides full  
+of bullet points and gimmicky transitions.
+
+-- [claire_smith.jpg][right][bg_width=auto]
+# Say it shorter
+KISS does the opposite.  Each slide  
+is one picture and one smallish text  
+box.
+
+-- [ali_luminescent_right.jpg] [opacity=85][bottom_left]
+# Flexibility
+You can get fancy if you want, but  
+KISS makes it easiest to do simple  
+messages and clear images.
+
+--   [example_cactus.jpg]
+# KISS Tutorial 
 This is a slide.  It inherits all the default values of  
 the universal slide, including the background image.  
 \
-<sub>BTW, press F-11 in most browsers to go full screen.</sub>
+<sub>BTW, this presentation looks a lot better if you press F-11 to go full screen.</sub>
 
 
 
 
 ; Set options on the line with the dashes:
+; Or we could use [bg_image=] to display the default background color.
+
 -- [white] [text_color=black]
 We can override the background  
 image by specifying a background  
 color (in this case, white).  
-\
-<sub>Or we could use [bg_image=] to display the</sub>  
-<sup>default background color.</sup>
 
-
---
+--  [example_cactus.jpg]
 # Keys
 By now, you know to hit the space bar to go  
 to the next slide.  Other keys:  
@@ -122,11 +143,12 @@ to the next slide.  Other keys:
   * Ctrl+Home - First slide 
   * Ctrl+End - Last slide
   * Page Up - Table of contents
---
+--  [example_cactus.jpg]
 # Simple Slides
-The slides are simple.  Here's the last one:
+The slides are simple.  Here's that last one:
 
-     -- [title=Keys]
+     --
+     # Keys
      By now, you know to hit the space bar to go  
      to the next slide.  Other keys:  
      
@@ -134,14 +156,14 @@ The slides are simple.  Here's the last one:
        * Ctrl+End - Last slide
        * Page Up - Table of contents
 
---
+--  [example_cactus.jpg]
 # Unicode
 If you want bullets, you can use:  
 \
-♥ the usual &lt;ul&gt; tags  
-♥ unicode characters (as we did here)  
+<font color=red>♥</font> the usual &lt;ul&gt; tags  
+<font color=red>♥</font> unicode characters (as we did here)  
 \
-Input files are expected to be UTF-8.
+<sup>KISS handles UTF-8 just fine. Don't fear the unicode!</sup>
 
 -- [example_cactus.jpg][bottom_left]
 # Pandoc
@@ -166,9 +188,51 @@ and it works as expected.</td><td><div style="margin-bottom:5px;"></div><div sty
 
 
 
+-- [example_cactus.jpg] [top]
+<style type="text/css">
+#fooObject {
+ /* simple box */
+ position:absolute;
+ left:0px;
+ top:8em;
+ width:auto;
+ line-height:3em;
+ border:2px solid cornflowerblue;
+ white-space:nowrap;
+ padding:0.5em;
+background-color:grey;
+ background-image: url(${opaque_image});
+}
+</style>
+<script type="text/javascript">
+
+var foo = null; // object
+
+function doMove() {
+  foo.style.left = parseInt(foo.style.left)+1+'px';
+  setTimeout(doMove,20); // call doMove in 20msec
+}
+
+function init() {
+  foo = document.getElementById('fooObject'); // get the "foo" object
+  foo.style.left = '0px'; // set its initial position to 0px
+  doMove(); // start animating
+}
+
+
+window.onload = init;
+
+</script>
+You can get fancy with the  
+javascript if that's your thing.
+<div id="fooObject">
+ Javascript is for <font color="cornflowerblue">ART★STARS!<font>
+</div>
+
 -- [example_ottoman.jpg] [bottom]
 # Portability
 KISS outputs html, css and javascript files,  
 so your slideshow will run in any modern  
 browser on any modern computer or smart  
 phone.
+
