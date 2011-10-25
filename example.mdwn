@@ -88,6 +88,16 @@
 ; But we're going to give this example a title, just for demonstration:
 [title=KISS Demo]
 
+; We can have the slides auto advance after a certain number of
+; seconds (press F5 to start playback of slides):
+[duration=30]
+; But normally, we want to advance it manually:
+[duration=0]
+
+; Playback should loop around to the first slide at the end of the
+; deck:
+[loop=on]
+
 ; That's it!  Those are the default universal options for your slides.  Override
 ; them as you please.  You probably want the default for most options, so you 
 ; can delete most of the above from your input file.
