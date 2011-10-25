@@ -40,6 +40,7 @@ defaults = {
            'font_size':'40px',
            'font_style':'normal',
            'font_weight':'100',
+           'loop':'on',
            'halign':'left',
            'hpos':'center',
            'opacity':"55",
@@ -164,7 +165,7 @@ class Slide():
       return d
 
    def no_extra_fields(self, d):
-      fields = defaults.keys() + ['content', 'last_slide', 'next', 'opaque_image', 'prev']
+      fields = defaults.keys() + ['content', 'last', 'last_slide', 'next', 'opaque_image', 'prev']
       for k,v in d.items():
          if not k.lower() in fields:
             sys.stderr.write("Unknown field: %s (%s)\n" % (k, v))
@@ -179,11 +180,14 @@ class Slide():
    def render(self, universal=None, template='', last=False):
       l = {
            'content':'',
+           'last':self.num == self.deck.count,
            'last_slide': "slide_%02d.html" % self.deck.count,
            'next':"slide_%02d.html" % min(self.deck.count, self.num+1),
            'opaque_image':os.path.join(BKGRND_DIR, "opaque_%02d.png" % self.num),
            'prev':'slide_%02d.html' % max(1, self.num-1),
+
            }
+
       l.update(defaults)
       if universal:
          for k,v in universal.items():
@@ -200,6 +204,8 @@ class Slide():
       if l['vpos'] == 'center':
          l['vpos'] = "middle"
 
+      if l['duration'] != "0":
+         l['duration'] = int(l['duration']) * 1000
       self.no_extra_fields(l)
       fname = "slide_%02d.html" % self.num
       print "Writing %s" % fname

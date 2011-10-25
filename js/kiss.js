@@ -1,3 +1,15 @@
+// autoplay
+var play_timer;
+function toggle_play() {
+    if (play == '') {
+	follow_rel("play");
+	play = '1';
+    } else {
+	clearTimeout(play_timer);
+	play = '';
+    }			     
+}
+
 /* KEYBOARD SHORTCUTS */
 function follow_rel(rel) {
     window.location = $('link[rel|="'+rel+'"]').attr("href");
@@ -8,8 +20,7 @@ shortcut.add("Right",function() {    follow_rel("next")  }, {'disable_in_input':
 shortcut.add("Left",function() {    follow_rel("previous")  }, {'disable_in_input':true});
 shortcut.add("Ctrl+End",function() {  follow_rel("end")  }, {'disable_in_input':true});
 shortcut.add("Page_up",function() {  follow_rel("contents")  }, {'disable_in_input':true});
-shortcut.add("F5",function() {  follow_rel("next")  }, {'disable_in_input':true});
-
+shortcut.add("F5",function() { toggle_play() }, {'disable_in_input':true});
 
 /* FADE IN */
 /* Fade-In Page script ©2008 John Davenport Scheuer
@@ -17,9 +28,21 @@ shortcut.add("F5",function() {  follow_rel("next")  }, {'disable_in_input':true}
    username:jscheuer1 - This credit must remain for legal use.
    */
 
-fadeInPage.speed=10; //Set speed of transition for non-IE, lower numbers are faster, 20 is the minimum safe value
+fadeInPage.speed=5; //Set speed of transition for non-IE, lower numbers are faster, 20 is the minimum safe value
 fadeInPage.bg='#000'; //Set backgroud style (color or color and image) of transition division for non-IE, should match page background or the predominant color of the page
 
+/* This next function is from http://www.netlobo.com/url_query_string_javascript.html */
+function gup( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
 ///////////////// Stop Editing /////////////////
 
 function fadeInPage(){
@@ -48,3 +71,4 @@ if(window.addEventListener&&fadeInPage.prprt){
 fadeInPage.set();
 window.addEventListener('load', fadeInPage, false);
 }
+

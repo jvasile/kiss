@@ -13,14 +13,23 @@
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <link rel="contents" href="toc.html" title="Table of contents">
   <link rel="start" href="slide_01.html" title="Start">
-  <link rel="end" href="${last_slide}" title="Start">
+  <link rel="end" href="${last_slide}" title="End">
   <link rel="previous" href="${prev}" title="Previous">
   <link rel="next" href="${next}" title="Next">
+  <link rel="play" href="${next}?play=1" title="Play">
+  <link rel="replay" href="slide_01.html?play=1" title="Replay">
 
   <!-- <script type="text/javascript" language="JavaScript1.2" src="js/pylize.js"></script> -->
   <script type="text/javascript" language="JavaScript1.2" src="js/jquery.js"></script>
   <script type="text/javascript" language="JavaScript1.2" src="js/shortcut.js"></script>
   <script type="text/javascript" language="JavaScript1.2" src="js/kiss.js"></script>
+  <script type="text/javascript" language="JavaScript1.2">
+var play = gup('play');
+if (play != '' && "${last}" == "False") { play_timer = setTimeout("follow_rel(\"play\");", ${duration}); }
+if (play != '' && "${last}" == "True" && "${loop}" == "on") { play_timer = setTimeout("follow_rel(\"replay\");", ${duration}); }
+//alert(screen.width);//
+//alert(screen.height);//
+</script>
   <style type="text/css">
 body {
   background-color:${bg_color};
@@ -67,7 +76,6 @@ img#bg {
   </head>
 <!--  <body id="body" onLoad="initPage()"> -->
   <body id="body">
-
 <div id="fadeDiv"></div>
 %if bg_image != '':
     <img src="${bg_image}" id="bg" />
