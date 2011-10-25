@@ -40,7 +40,7 @@ defaults = {
            'font_size':'40px',
            'font_style':'normal',
            'font_weight':'100',
-           'loop':'on',
+           'loop':'off',
            'halign':'left',
            'hpos':'center',
            'opacity':"55",
