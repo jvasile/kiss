@@ -12,7 +12,7 @@ Released under the GNU General Public License, version 3 or later.
 See LICENSE file for copyright details.
 """
 
-import sys, os, copy, subprocess, shlex, argparse, codecs
+import sys, os, copy, subprocess, shlex, argparse, codecs, tarfile
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
 
@@ -290,6 +290,7 @@ def parse_cmdline():
                                     )
    parser.add_argument('-i','--init', action='store_true', help='create a KISS project in this directory')
    parser.add_argument('--skeleton', action='store', metavar="DIR", help='specify skeleton directory for init to copy', default=None)
+   parser.add_argument('-z','--zip', action='store_true', help='build then pack a KISS project into a .tar.gz')
 
    parser.add_argument('template', nargs='?', default=None)
    parser.add_argument('inputfile', nargs='?', default=None)
@@ -308,10 +309,25 @@ def parse_cmdline():
       opt.template = None
    return opt
 
+def targz_project(inputfile):
+   with tarfile.open(os.path.splitext(inputfile)[0]+ ".tar.gz", 'w:gz') as OUTF:
+      for f in os.listdir('.'):
+         if f.startswith('slide_') and f.endswith('.html'):
+            OUTF.add(f)
+      OUTF.add("images")
+      OUTF.add("css")
+      OUTF.add("js")
+
 def main():
    o = parse_cmdline()
    s = Slides(o.inputfile, template=get_template(o.template), opt=o.__dict__)
+   for f in os.listdir('.'):
+      if f.startswith('slide_') and f.endswith('.html'):
+         os.unlink(f)
    s.render()
+   if o.zip:
+      targz_project(o.inputfile)
+
 
 if __name__=="__main__":
    main()
