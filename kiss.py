@@ -7,7 +7,7 @@ KISS is simple slide presentation tool.
 It takes a file of (mostly) markdown and turns it into slides, as per
 your (brief and easy) instructions.
 
-KISS is copyright 2011 James Vasile.
+KISS is copyright 2011 James Vasile <james@jamesvasile.com>
 Released under the GNU General Public License, version 3 or later.
 See LICENSE file for copyright details.
 """
