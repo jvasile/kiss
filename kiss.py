@@ -157,6 +157,8 @@ class Slide():
          sys.stderr.write("Unrecognized slide parameter: [%s]\n" % param)
          sys.exit(-1)
 
+      if 'bg_image' in d and d['bg_image']:
+         self.deck.images[d['bg_image']] = d['bg_image']
    def parse_raw(self, raw):
       d={}
       for param in raw[0].split('['):
@@ -218,6 +220,7 @@ class Slide():
 class Slides():
    def __init__(self, fname=None, template=None, opt=None):
       self.slides=[]
+      self.images = {}
       self.opt = opt or {}
       self.fname = fname
       if self.fname:
@@ -309,14 +312,18 @@ def parse_cmdline():
       opt.template = None
    return opt
 
-def targz_project(inputfile):
+def targz_project(inputfile, templatefile, slides):
+   
    with tarfile.open(os.path.splitext(inputfile)[0]+ ".tar.gz", 'w:gz') as OUTF:
       for f in os.listdir('.'):
          if f.startswith('slide_') and f.endswith('.html'):
             OUTF.add(f)
-      OUTF.add("images")
+      for f in slides.images.keys():
+         OUTF.add(f)
       OUTF.add("css")
       OUTF.add("js")
+      OUTF.add(inputfile)
+      OUTF.add(templatefile or "template.html")
 
 def main():
    o = parse_cmdline()
@@ -326,7 +333,7 @@ def main():
          os.unlink(f)
    s.render()
    if o.zip:
-      targz_project(o.inputfile)
+      targz_project(o.inputfile, o.template, s)
 
 
 if __name__=="__main__":
