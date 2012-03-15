@@ -7,7 +7,7 @@ from kiss import Slides, Slide
 
 class SlidesTest (TestCase):
    def setUp (self):
-      self.slides = Slides("example.diff", template=kiss.get_template("template.html"), 
+      self.slides = Slides("example.mdwn", template=kiss.get_template("template.html"), 
                            opt={'title_h1':True})
    def tearDown (self):  pass
         
@@ -26,9 +26,9 @@ class SlidesTest (TestCase):
 
       """ Test loading of example file. """
 
-      self.failUnless(self.slides.fname == "example.diff")
-      self.failUnless(self.slides.count == 9, "There are 9 slides in the example deck (and one universal slide).")
-      self.failUnless(len(self.slides.slides) == 10, "There are 9 slides in the example deck (and one universal slide).")
+      self.failUnless(self.slides.fname == "example.mdwn")
+      self.failUnless(self.slides.count == 14, "There are 9 slides in the example deck (and one universal slide).")
+      self.failUnless(len(self.slides.slides) == 15, "There are 9 slides in the example deck (and one universal slide).")
 
    def test_load_defaults(self):
       """ Test loading of defaults from example file.
@@ -59,7 +59,7 @@ class SlidesTest (TestCase):
       self.failUnless(u['bg_width'] == d['bg_width'])
       self.failUnless(u['bg_x'] == d['bg_x'])
       self.failUnless(u['bg_y'] == d['bg_y'])
-      self.failUnless(u['title'] == d['title'])
+      self.failUnless(u['title'] == "KISS Demo")
 
    def test_unicode(self):
       """ Test that we load unicode input file properly. """
