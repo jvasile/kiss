@@ -48,6 +48,7 @@ defaults = {
            'text_color':'white',
            'title':'',
            'vpos':'middle',
+           'version':__version__
 }
 
 def encode_for_xml(unicode_data, encoding='ascii'):
@@ -314,12 +315,23 @@ def parse_cmdline():
 
 def targz_project(inputfile, templatefile, slides):
    
+   images = {}
    with tarfile.open(os.path.splitext(inputfile)[0]+ ".tar.gz", 'w:gz') as OUTF:
       for f in os.listdir('.'):
          if f.startswith('slide_') and f.endswith('.html'):
             OUTF.add(f)
+            with open(f, 'r') as INF:
+               b = BeautifulSoup(INF.read())
+               for i in b.findAll('img'):
+                  images[i['src']] = i['src']
+
       for f in slides.images.keys():
-         OUTF.add(f)
+         images[f] = f
+
+      for i in images.keys():
+         print i
+         OUTF.add(i)
+
       OUTF.add("css")
       OUTF.add("js")
       OUTF.add(inputfile)
