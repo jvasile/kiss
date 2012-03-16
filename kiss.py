@@ -19,7 +19,7 @@ import sys, os, copy, subprocess, shlex, argparse, codecs, tarfile
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
 
-__version__ = "1.2"
+__version__ = "1.2.1"
 __author__ = "James Vasile"
 __copyright__ = "Copyright 2011, James Vasile"
 __license__ = "GPLv3 or later"
