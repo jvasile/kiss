@@ -19,7 +19,7 @@ shortcut.add("Space",function() {    follow_rel("next")  }, {'disable_in_input':
 shortcut.add("Right",function() {    follow_rel("next")  }, {'disable_in_input':true});
 shortcut.add("Left",function() {    follow_rel("previous")  }, {'disable_in_input':true});
 shortcut.add("Ctrl+End",function() {  follow_rel("end")  }, {'disable_in_input':true});
-shortcut.add("Page_up",function() {  follow_rel("contents")  }, {'disable_in_input':true});
+// shortcut.add("Page_up",function() {  follow_rel("contents")  }, {'disable_in_input':true});
 shortcut.add("F5",function() { toggle_play() }, {'disable_in_input':true});
 
 /* FADE IN */

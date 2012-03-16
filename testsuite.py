@@ -1,13 +1,15 @@
-import sys, unittest
+import os, sys, unittest
 from unittest import TestCase
 import kiss
 from kiss import Slides, Slide
 
 # run with "python testsuite.py"
 
+in_fname = "example.mdwn"
+
 class SlidesTest (TestCase):
    def setUp (self):
-      self.slides = Slides("example.mdwn", template=kiss.get_template("template.html"), 
+      self.slides = Slides(in_fname, template=kiss.get_template("template.html"), 
                            opt={'title_h1':True})
    def tearDown (self):  pass
         
@@ -21,12 +23,12 @@ class SlidesTest (TestCase):
       self.failUnless(unloaded_slides.slides == [])
       self.failUnless(unloaded_slides.opt['test'])
       
-
    def test_load (self):
 
       """ Test loading of example file. """
 
-      self.failUnless(self.slides.fname == "example.mdwn")
+      self.failUnless(os.path.exists(in_fname))
+      self.failUnless(self.slides.fname == in_fname)
       self.failUnless(self.slides.count == 14, "There are 9 slides in the example deck (and one universal slide).")
       self.failUnless(len(self.slides.slides) == 15, "There are 9 slides in the example deck (and one universal slide).")
 

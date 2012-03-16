@@ -175,11 +175,13 @@ If you want bullets, you can use:
 \
 <sup>KISS handles UTF-8 just fine. Don't fear the unicode!</sup>
 
--- [example_cactus.jpg][bottom_left]
+-- [example_cactus.jpg][bottom]
 # Pandoc
-By default, we use markdown.  But there is a command line option that allows you to specify any other filter to convert what you type to html.  Here is how we could use `Pandoc` to process rst input:
+We use Markdown by default.  But there is a command line option that
+allows you to specify any other filter to convert what you type to
+html.  Here is how we could use `Pandoc` to process rst input:
 
-           --filter "pandoc --from=rst --to=html"
+      --filter "pandoc --from=rst --to=html"
 
 -- [example_cactus.jpg] [bottom]
 # Markdown Tips
