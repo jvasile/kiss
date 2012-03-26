@@ -201,7 +201,7 @@ class Slide():
       for k,v in self.fields.items():
          l[k] = v
 
-      l['content'] = self.process_markup(l['content'].encode(sys.getfilesystemencoding())).strip()
+      l['content'] = self.process_markup(l['content'].encode('utf8')).strip()
       if not l['title']:
           soup= BeautifulSoup(l['content'])
           body = soup.find('h1')
