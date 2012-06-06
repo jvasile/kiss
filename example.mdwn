@@ -59,15 +59,6 @@
 ; Text within the box can be left, center or right justified:
 [halign=left]
 
-; THIS FEATURE IS NOT YET IMPLEMENTED.  It sets the time to show each slide.
-; At the end of 5.5 seconds, the browser will go to the next slide.  Omit this
-; option or set to 0 to disable auto advancing the slide.
-[duration=5.5]
-
-; But I like don't like my slides to advance automatically, so the default is
-; to leave that feature disabled:
-[duration=0]
-
 ; We can set the background image in long form:
 [bg_image=example.png]
 ; Or we can just name a file:
