@@ -87,7 +87,7 @@
 
 ; Playback should loop around to the first slide at the end of the
 ; deck:
-[loop=on]
+[autorewind=on]
 
 ; That's it!  Those are the default universal options for your slides.  Override
 ; them as you please.  You probably want the default for most options, so you 
