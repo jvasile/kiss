@@ -239,3 +239,9 @@ so your slideshow will run in any modern
 browser on any modern computer or smart  
 phone.
 
+-- 
+# More Features
+
+I'm still adding effects, like this silly fade in:
+
+What's brown and sticky?&nbsp;<span id="delayed_text" class="delayed_text" style="display: none;">A stick.</span>

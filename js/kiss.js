@@ -10,6 +10,11 @@ function toggle_play() {
     }			     
 }
 
+// delayed text
+setTimeout(function() {
+    $('.delayed_text').fadeIn();
+}, 5000);
+
 /* KEYBOARD SHORTCUTS */
 function follow_rel(rel) {
     window.location = $('link[rel|="'+rel+'"]').attr("href");
