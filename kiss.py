@@ -19,7 +19,7 @@ import sys, os, copy, subprocess, shlex, argparse, codecs, tarfile
 from BeautifulSoup import BeautifulSoup
 from mako.template import Template
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 __author__ = "James Vasile"
 __copyright__ = "Copyright 2011, James Vasile"
 __license__ = "GPLv3 or later"
@@ -30,6 +30,7 @@ __status__ = "Development"
 BKGRND_DIR = "images/tmp"
 
 defaults = {
+           'autorewind':'on',
            'bg_color':'black',
            'bg_height':"100%",
            'bg_image':'',
@@ -43,7 +44,6 @@ defaults = {
            'font_size':'40px',
            'font_style':'normal',
            'font_weight':'100',
-           'autorewind':'on',
            'halign':'left',
            'hpos':'center',
            'opacity':"55",
