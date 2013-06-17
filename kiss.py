@@ -44,6 +44,7 @@ defaults = {
            'font_size':'40px',
            'font_style':'normal',
            'font_weight':'100',
+           'javascript':'',
            'halign':'left',
            'hpos':'center',
            'note':False,
@@ -111,7 +112,6 @@ class Slide():
          self.fields = d
       elif raw:
          self.fields = self.parse_raw(raw)
-
       if count:
          self.num = count
 
@@ -156,6 +156,10 @@ class Slide():
             d['hpos']='center'
       elif lparam == "bold":
          d['font_weight']="bold"
+      elif param.endswith(".js") and os.path.exists(os.path.join("js", param)):
+         if not 'javascript' in d:
+            d['javascript'] = ''
+         d['javascript'] += '<script type="text/javascript" language="Javascript1.2" src="%s"></script>\n' % os.path.join("js", param)
       elif '.' in param and os.path.exists(param):
          d['bg_image'] = param
       elif '.' in param and os.path.exists(os.path.join("images", param)):
@@ -166,6 +170,7 @@ class Slide():
 
       if 'bg_image' in d and d['bg_image']:
          self.deck.images[d['bg_image']] = d['bg_image']
+
    def parse_raw(self, raw):
       d={}
       for param in raw[0].split('['):
@@ -174,7 +179,7 @@ class Slide():
       return d
 
    def no_extra_fields(self, d):
-      fields = defaults.keys() + ['content', 'last', 'last_slide', 'next', 'opaque_image', 'prev']
+      fields = defaults.keys() + ['content', 'javascript', 'last', 'last_slide', 'next', 'opaque_image', 'prev']
       for k,v in d.items():
          if not k.lower() in fields:
             sys.stderr.write("Unknown field: %s (%s)\n" % (k, v))

@@ -4,7 +4,7 @@
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <meta name="Generator" content="Kiss ${version} (http://github.com/jvasile/kiss)" />
+
   <meta http-equiv="Page-Enter" content="blendTrans(Duration=3.0)">
   <!-- NOTE: Above meta tag required for IE fade page, adjust duration (in seconds) as desired -->
 
@@ -23,6 +23,7 @@
   <script type="text/javascript" language="JavaScript1.2" src="js/jquery.js"></script>
   <script type="text/javascript" language="JavaScript1.2" src="js/shortcut.js"></script>
   <script type="text/javascript" language="JavaScript1.2" src="js/kiss.js"></script>
+  ${javascript}
   <script type="text/javascript" language="JavaScript1.2">
 var play = gup('play');
 if (play != '' && "${last}" == "False") { play_timer = setTimeout("follow_rel(\"play\");", ${duration}); }
