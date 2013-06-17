@@ -46,6 +46,7 @@ defaults = {
            'font_weight':'100',
            'halign':'left',
            'hpos':'center',
+           'note':False,
            'opacity':"55",
            'text_bg':'black',
            'text_color':'white',
@@ -105,7 +106,7 @@ class Slide():
    def __init__(self, d=None, raw=None, count=1, opt=None, deck=None):
       self.opt = opt or {}
       if deck:
-         self.deck = deck
+         self.deck = deck # store pointer to parent object
       if d:
          self.fields = d
       elif raw:
@@ -126,7 +127,9 @@ class Slide():
          val = ''
 
       lparam = param.lower()
-      if lparam == 'fill' or lparam == "fit":
+      if lparam == 'note':
+         d['note'] = True
+      elif lparam == 'fill' or lparam == "fit":
          d['fill'] = param == 'fill'
          d['fit'] = param == 'fit'
       elif lparam in 'aliceblue antiquewhite aqua aquamarine azure beige bisque black blanchedalmond blue blueviolet brown burlywood cadetblue chartreuse chocolate coral cornflowerblue cornsilk crimson cyan darkblue darkcyan darkgoldenrod darkgray darkgrey darkgreen darkkhaki darkmagenta darkolivegreen darkorange darkorchid darkred darksalmon darkseagreen darkslateblue darkslategray darkslategrey darkturquoise darkviolet deeppink deepskyblue dimgray dimgrey dodgerblue firebrick floralwhite forestgreen fuchsia gainsboro ghostwhite gold goldenrod gray grey green greenyellow honeydew hotpink indianred indigo ivory khaki lavender lavenderblush lawngreen lemonchiffon lightblue lightcoral lightcyan lightgoldenrodyellow lightgray lightgrey lightgreen lightpink lightsalmon lightseagreen lightskyblue lightslategray lightslategrey lightsteelblue lightyellow lime limegreen linen magenta maroon mediumaquamarine mediumblue mediumorchid mediumpurple mediumseagreen mediumslateblue mediumspringgreen mediumturquoise mediumvioletred midnightblue mintcream mistyrose moccasin navajowhite navy oldlace olive olivedrab orange orangered orchid palegoldenrod palegreen paleturquoise palevioletred papayawhip peachpuff peru pink plum powderblue purple red rosybrown royalblue saddlebrown salmon sandybrown seagreen seashell sienna silver skyblue slateblue slategray slategrey snow springgreen steelblue tan teal thistle tomato turquoise violet wheat white whitesmoke yellow yellowgreen':
@@ -178,12 +181,22 @@ class Slide():
             sys.exit(-1)
 
    def process_markup(self, content):
-      p = subprocess.Popen(['pandoc', '--from=markdown', '--to=html'],
-                           stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+      try:
+         p = subprocess.Popen(['pandoc', '--from=markdown', '--to=html'],
+                              stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+      except OSError, e:
+         if e.errno == 2:
+            sys.stderr.write("Couldn't run Pandoc.  Is it installed?\n")
+            sys.exit(1)
+         else:
+            raise
       return p.communicate(content)[0].replace('<br />','<br />\n')
+      
 
+   def get_fields(self, universal = None):
+      """return all the fields in the slide, taking into account the
+      universal slide and the defaults and the per-slide options"""
 
-   def render(self, universal=None, template='', last=False):
       l = {
            'content':'',
            'last':self.num == self.deck.count,
@@ -195,12 +208,15 @@ class Slide():
            }
 
       l.update(defaults)
-      if universal:
-         for k,v in universal.items():
-            l[k] = v
+      if not universal:
+         universal = self.deck.slides[0].fields
+      for k,v in universal.items():
+         l[k] = v
       for k,v in self.fields.items():
          l[k] = v
-
+      return l
+   def render(self, universal=None, template='', last=False):
+      l = self.get_fields()
       l['content'] = self.process_markup(l['content'].encode('utf8')).strip()
       if not l['title']:
           soup= BeautifulSoup(l['content'])
@@ -213,7 +229,10 @@ class Slide():
       if l['duration'] != "0":
          l['duration'] = int(l['duration']) * 1000
       self.no_extra_fields(l)
-      fname = "slide_%02d.html" % self.num
+      if l['note']:
+         fname = "note_%02d.html" % (self.num-1)
+      else:
+         fname = "slide_%02d.html" % self.num
       print "Writing %s" % fname
       with open(fname, 'w') as OUTF:
          l['content'] = encode_for_xml(l['content'].decode('UTF-8', "ignore"), 'ascii')
@@ -251,7 +270,8 @@ class Slides():
                self.slides.append(Slide(raw=[params,raw], count=self.count, opt=self.opt, deck=self))
             params = line[2:].strip()
             raw=''
-            self.count += 1
+            if not self.slides[-1].get_fields()['note']:
+               self.count += 1
          else:
             raw += line
 
